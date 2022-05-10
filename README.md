@@ -1,8 +1,9 @@
 
 [![](https://img.shields.io/github/followers/RossiFire?label=Github&style=for-the-badge)](https://github.com/RossiFire)
+[![](https://img.shields.io/github/followers/RossiFire?label=Github&style=for-the-badge)](https://github.com/RossiFire)
 # DRS - Navbar 
 
-This is an Angular responsive Navbar. It is fully responsive and highly customizable
+Simple Angular Navbar. It's fully responsive and highly customizable.
 
 
 ## Installation
@@ -16,7 +17,7 @@ $ npm i drs-navbar
 Some informations before the effective usage:
 
 * You can set as many dropdown as you want
-* This library use [FontAwesome](https://fontawesome.com/) as icons. In order to use this Navbar you have to import the following libraries:
+* [FontAwesome](https://fontawesome.com/) icons are used, so you have to import the following libraries:
 
 ```shell
 $ npm i @fortawesome/fontawesome-svg-core
@@ -26,7 +27,7 @@ $ npm i @fortawesome/angular-fontawesome<version>
 * Follow [This Guide](https://www.npmjs.com/package/@fortawesome/angular-fontawesome) to select the right angular-fortawensome version
 
 
-In your app.module.ts
+Import `DrsNavbarModule` in your `app.module.ts`
 ```js
 import { DrsNavbarModule } from 'drs-navbar';
 
@@ -41,7 +42,7 @@ import { DrsNavbarModule } from 'drs-navbar';
   bootstrap: [AppComponent]
 ```
 
-In your ts file
+Declare a configuration in your .ts file
 ```js
 @NgModule({
     drsNavabarConfig: DrsNavbarConfiguration = {
@@ -75,7 +76,7 @@ In your HTML file
 <drs-navbar [navbarConfiguration]="drsNavabarConfig"></drs-navbar>
 ```
 
-* in mobile mode, the dropdown links are scrollable, so you see the firsts three and than you can scroll
+* Dropdown links are scrollable, so only the first three are visible
 
 ## Properties
  Property | Usage | Mandatory
