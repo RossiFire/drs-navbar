@@ -1,0 +1,47 @@
+<div class="nvb" [ngClass]="paletteClass" #drsNavbar>
+  <!-- Menù in Desktop Size -->
+  <!-- ========================================== -->
+  <div class="nvb-open">
+    <div class="nvb-icon-box">
+        <img [src]="navbarConfiguration.logoSrc" class="spc-logo" alt="logo" [routerLink]="['/']" *ngIf="navbarConfiguration.logoSrc">
+    </div>
+    <div class="nvb-ul" [ngClass]="paletteClass">
+      <div class="nvb-items-wrapper" *ngFor="let link of internalLinks">
+        <div class="nvb-items" *ngIf="link.route" [routerLink]="link.route" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}" (click)="emitLinksClick(link.name)">
+          <div class="nvb-link" [ngClass]="paletteClass">{{link.name}}</div>
+        </div>
+        <!-- Dropdown in Desktop Size -->
+        <div class="dropdown" *ngIf="link.dropDownList && link.show && dropDownShowing === link.key">
+          <p *ngFor="let item of link.dropDownList" (click)="emitDropDownClick(item.name!)">{{item.name}}</p>
+        </div>
+          <fa-icon [icon]="link.arrow!" *ngIf="link.dropDownList" class="big-chevron" (click)="showDesktopDropdown(link.key)"></fa-icon>
+      </div>
+    </div>
+  </div>
+  <!-- ========================================== -->
+
+
+  <!-- Hamburger menù in mobile phone -->
+  <!-- ========================================== -->
+  <div class="hamburger-menu" [ngClass]="paletteClass" (click)="openNav()"><fa-icon [icon]="currentMenuIcon"></fa-icon></div>
+  <!-- ========================================== -->
+  <!-- Navbar in Mobile Phone -->
+  <div class="nvb-close">
+    <div class="nvb-box-wrapper" [ngClass]="paletteClass" *ngFor="let link of internalLinks" [routerLinkActive]="link.route ? 'active' : ''" [routerLinkActiveOptions]="{exact: true}">
+      <div class="nvb-box">
+        <!-- Main Link -->
+        <div class="main-link" [routerLink]="link.route" (click)="emitLinksClick(link.name)">
+          <div >
+            <fa-icon [icon]="link.icon!"></fa-icon>
+            <span>{{link.name}}</span>
+          </div>
+        </div>
+      </div>
+      <!-- DropDown in Mobile Phone -->
+        <div class="sub-list" *ngIf="link.dropDownList && link.show">
+          <p class="sub-link" *ngFor="let item of link.dropDownList" (click)="emitDropDownClick(item.name!)">{{item.name}}</p>
+        </div>
+      <fa-icon [icon]="link.arrow!" class="chevron" *ngIf="link.dropDownList" (click)="showPhoneDropdown(link.key)"></fa-icon>
+    </div>
+  </div>
+</div>

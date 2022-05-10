@@ -1,0 +1,55 @@
+
+/*    RED PALETTE
+========================================================================================== */
+/* Navbar Border */
+.nvb.red-palette{border-bottom: 5px solid #e2373f;}
+/* Desktop link box active */
+.nvb-ul.red-palette .active::before{ background-color: #e2373f45;}
+/* Box in Phone mode */
+.nvb-box-wrapper.red-palette.active{background-color: #e2373f;}
+/* Hamburger menu */
+.hamburger-menu.red-palette{background-color: #e2373f45;}
+
+/*    VIOLETTE PALETTE
+========================================================================================== */
+/* Navbar Border */
+.nvb.violet-palette{border-bottom: 5px solid #9b59b6;}
+/* Desktop link box active */
+.nvb-ul.violet-palette .active::before{ background-color: #9b59b645;}
+/* Box in Phone mode */
+.nvb-box-wrapper.violet-palette.active{background-color: #9b59b6;}
+/* Hamburger menu */
+.hamburger-menu.violet-palette{background-color: #9b59b645;}
+
+/*    GREEN PALETTE
+========================================================================================== */
+/* Navbar Border */
+.nvb.green-palette{border-bottom: 5px solid #16a085;}
+/* Desktop link box active */
+.nvb-ul.green-palette .active::before{ background-color: #16a08545;}
+/* Box in Phone mode */
+.nvb-box-wrapper.green-palette.active{background-color: #16a085;}
+/* Hamburger menu */
+.hamburger-menu.green-palette{background-color: #16a08545;}
+
+/*    SKY PALETTE
+========================================================================================== */
+/* Navbar Border */
+.nvb.sky-palette{border-bottom: 5px solid #2980b9;}
+/* Desktop link box active */
+.nvb-ul.sky-palette .active::before{ background-color: #2980b945;}
+/* Box in Phone mode */
+.nvb-box-wrapper.sky-palette.active{background-color: #2980b9;}
+/* Hamburger menu */
+.hamburger-menu.sky-palette{background-color: #2980b945;}
+
+/*    ORANGE PALETTE
+========================================================================================== */
+/* Navbar Border */
+.nvb.orange-palette{border-bottom: 5px solid #e67e22;}
+/* Desktop link box active */
+.nvb-ul.orange-palette .active::before{ background-color: #e67e22a6;}
+/* Box in Phone mode */
+.nvb-box-wrapper.orange-palette.active{background-color: #e67e22;}
+/* Hamburger menu */
+.hamburger-menu.orange-palette{background-color: #e67e22a6;}
