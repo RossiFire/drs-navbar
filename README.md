@@ -1,7 +1,11 @@
 
 [![](https://img.shields.io/github/followers/RossiFire?label=Github&style=for-the-badge)](https://github.com/RossiFire)
-[![](https://img.shields.io/github/followers/RossiFire?label=Github&style=for-the-badge)](https://github.com/RossiFire)
-# DRS - Navbar 
+
+# Demo
+
+[Test Here](https://codesandbox.io/embed/practical-night-1ueohq?fontsize=14&hidenavigation=1&theme=dark)
+
+# Drs - Navbar 
 
 Simple Angular Navbar. It's fully responsive and highly customizable.
 
