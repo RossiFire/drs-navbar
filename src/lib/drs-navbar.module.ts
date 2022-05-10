@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     CommonModule,
-    RouterModule.forRoot([]),
+    RouterModule,
     FontAwesomeModule
   ],
   exports: [
