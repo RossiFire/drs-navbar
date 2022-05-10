@@ -1,7 +1,5 @@
 
-<!-- [![npm version](https://img.shields.io/npm/v/ngx-bootstrap-navbar.svg?style=flat-square)](https://www.npmjs.com/package/ngx-bootstrap-navbar)
-[![npm downloads total](https://img.shields.io/npm/dt/ngx-bootstrap-navbar.svg?style=flat-square)](https://www.npmjs.com/package/ngx-bootstrap-navbar)
-[![npm downloads monthly](https://img.shields.io/npm/dm/ngx-bootstrap-navbar.svg?style=flat-square)](https://www.npmjs.com/package/ngx-bootstrap-navbar) -->
+[![](https://img.shields.io/github/followers/RossiFire?label=Github&style=for-the-badge)](https://github.com/RossiFire)
 # DRS - Navbar 
 
 This is an Angular responsive Navbar. It is fully responsive and highly customizable
