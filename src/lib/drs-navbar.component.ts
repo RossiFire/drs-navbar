@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
-import { faBars, faChevronDown, faChevronUp, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { faBars, faChevronDown, faChevronUp, faClose, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'drs-navbar',
@@ -11,27 +11,41 @@ export class DrsNavbarComponent implements OnInit, OnChanges{
   constructor(
     ) { }
 
-    /*  Declarations
-    ============================================================================================== */
+
+    /**
+     * Main links custom template
+     */
+    @Input() linkTemplate!: TemplateRef<DrsNavbarLinks>;
+
+    /**
+     * How the records in dropdown lists are shown
+     */
+    @Input() dropdownTemplate!: TemplateRef<DrsNavbarDropdown>;
+
+    /**
+     * Custom content in the button section when the navbar is open and close.
+     *
+     * **The button is shown only in mobile version**
+     */
+    @Input() buttonTemplate?: ButtonTemplate;
+
+
+    /**
+     * {@link DrsNavbarConfiguration DrsNavbarConfiguration} configuration
+     */
+    @Input() navbarConfiguration!: DrsNavbarConfiguration;
+
 
     @ViewChild("drsNavbar") navbar!: ElementRef<HTMLElement>;
-
-    // Hamburger icon
-    currentMenuIcon = faBars
-    menuIcons: DrsMenuIcons = {whenNavbarClose: faBars, whenNavbarOpen: faTimes}
+    @ViewChildren("lnks") links!: QueryList<any>;
 
     // Dropdown showed
     dropDownShowing: number = -1
-
-    // User data
-    @Input() navbarConfiguration!: DrsNavbarConfiguration;
-
-    // My Links
-    internalLinks!: CustomNavbarLink[];
     paletteClass: string = '';
+    isOpen = false
 
     // Event emitter
-    @Output() onDropDownClick = new EventEmitter<string>();
+    @Output() onDropdownClick = new EventEmitter<string>();
     @Output() onLinkClick = new EventEmitter<string>();
 
 
@@ -47,6 +61,14 @@ export class DrsNavbarComponent implements OnInit, OnChanges{
     /* Navbar Style/Open & Close Method
     ======================================================================================= */
 
+
+    @HostListener('document:click', ['$event'])
+    clickout(event: any) {
+      if(!this.links.some(x=> x.nativeElement.contains(event.target)) && document.body.clientWidth > 900){
+        this.clearDropdown();
+      }
+    }
+
     @HostListener('window:scroll', ['$event'])
     navbarChanges(event: any){
       if(document.documentElement.scrollTop > 50){
@@ -60,16 +82,10 @@ export class DrsNavbarComponent implements OnInit, OnChanges{
     }
 
     // open navbar when device mode
-    openNav(){
-      if(this.navbar.nativeElement.classList.contains("show")){
-        this.navbar.nativeElement.classList.remove("show");
-        this.navbar.nativeElement.querySelector(".nvb-close")?.classList.remove("show");
-        this.currentMenuIcon = this.menuIcons.whenNavbarClose
-      }else{
-        this.navbar.nativeElement.classList.add("show");
-        this.navbar.nativeElement.querySelector(".nvb-close")?.classList.add("show");
-        this.currentMenuIcon = this.menuIcons.whenNavbarOpen
-      }
+    toggleNavOnButtonClick(){
+      this.navbar.nativeElement.classList.toggle("show");
+      this.navbar.nativeElement.querySelector(".nvb-close")?.classList.toggle("show");
+      this.isOpen = !this.isOpen
     }
 
     // close when clicking a route
@@ -77,6 +93,7 @@ export class DrsNavbarComponent implements OnInit, OnChanges{
       this.navbar.nativeElement.classList.remove("show");
       this.navbar.nativeElement.querySelector(".nvb-close")?.classList.remove("show");
       this.clearDropdown();
+      this.isOpen = false
     }
 
 
@@ -85,88 +102,39 @@ export class DrsNavbarComponent implements OnInit, OnChanges{
 
     // Set All NavbarConfiguration
     initializeConfiguration(){
-      /* Set Dropdown if needed */
-      this.internalLinks = []
-      this.navbarConfiguration.links.map(
-        (link,i)=>{
-          if(link.dropDownList){
-            let customDropDown: CustomDrsDropdown[] = []
-            link.dropDownList.map((dropdown,j)=>{ customDropDown.push({key: j, name: dropdown.name})})
-            this.internalLinks?.push({key: i, name: link.name, route: link.route, dropDownList: customDropDown, icon: link.icon, show: false, arrow: faChevronDown})
-          }else{
-            this.internalLinks?.push({key: i, name: link.name, route: link.route,icon: link.icon});
-          }
-        }
-      )
       /* Set Palette */
       if(this.navbarConfiguration.palette){
         this.paletteClass = this.navbarConfiguration.palette?.valueOf()!
       }
-      /* Set icon */
-      this.menuIcons = this.navbarConfiguration.currentMenuIcon ? this.navbarConfiguration.currentMenuIcon : {whenNavbarClose: faBars, whenNavbarOpen: faTimes}
-      this.currentMenuIcon = this.menuIcons.whenNavbarClose
-
-
     }
 
     /* Show dropdown methopd for desktop device */
     showDesktopDropdown(key: number){
-      let dropdownAlreadyOpen = this.internalLinks.find(x=> x.arrow === faChevronUp)
-      if(dropdownAlreadyOpen){
-        dropdownAlreadyOpen.arrow = faChevronDown
-        dropdownAlreadyOpen.show = false
-      }
-      let link = this.internalLinks.find(x=> x.key === key);
-      if(link?.show || (this.internalLinks.indexOf(link!) === this.internalLinks.indexOf(dropdownAlreadyOpen!))){
-        this.dropDownShowing = -1;
-        link!.show = false
-        link!.arrow = faChevronDown
-      }else{
-        this.dropDownShowing = key;
-        link!.show = true;
-        link!.arrow = faChevronUp
-      }
+      this.dropDownShowing = this.dropDownShowing === key ? -1 : key
     }
 
     /* Show dropdown methopd for phone device */
     showPhoneDropdown(key: number){
-      let link = this.internalLinks.find(x=> x.key === key);
-      if(link?.show){
-        link.show = false
-        link.arrow = faChevronDown
-      }else{
-        link!.show = true;
-        link!.arrow = faChevronUp
-      }
+      this.dropDownShowing = this.dropDownShowing === key ? -1 : key
     }
+
     clearDropdown(){
       this.dropDownShowing = -1;
-      this.internalLinks.map(
-        link=>{
-          if(link.arrow){
-            link.arrow = faChevronDown
-          }
-          if(link.show){
-            link.show = false
-          }
-        }
-      )
-      this.currentMenuIcon = this.menuIcons.whenNavbarClose
     }
 
     /* Event Emitters Method
     ==================================================================================*/
 
     /** Link emitter */
-    emitLinksClick(name: string){
+    emitLinkClick(name: string){
       this.onLinkClick.emit(name);
       this.clearDropdown();
       this.closeNvb();
     }
 
     /** Dropdown emitter */
-    emitDropDownClick(type: string){
-      this.onDropDownClick.emit(type);
+    emitDropdownClick(type: string){
+      this.onDropdownClick.emit(type);
       this.clearDropdown();
       this.closeNvb();
     }
@@ -190,29 +158,23 @@ export class DrsMenuIcons{
 export class DrsNavbarLinks{
   name!: string
   route!: string
-  icon?: IconDefinition
   dropDownList?: DrsNavbarDropdown[]
+  custom?: Partial<any>
 }
 
-/* Used only here in the component */
-class CustomNavbarLink{
-  key!: number
-  name!: string
-  route!: string
-  icon?: IconDefinition
-  show?: boolean
-  dropDownList?: CustomDrsDropdown[]
-  arrow?: IconDefinition
- }
 
 export class DrsNavbarDropdown{
    name!: string
+   key!: any
+   other?: Partial<any>
  }
 
- class CustomDrsDropdown{
-  key!: number
-  name!: string
+ export class ButtonTemplate{
+  openedDropdown!: TemplateRef<any>
+  closedDropdown!: TemplateRef<any>
  }
+
+
 
 export enum DrsNavbarPalette{
    DarkPalette = 'dark-palette',

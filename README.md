@@ -1,14 +1,13 @@
 
 [![](https://img.shields.io/github/followers/RossiFire?label=Github&style=for-the-badge)](https://github.com/RossiFire)
 
+# Drs - Navbar 
+
+Customizable Routing based Angular Navbar. It's fully responsive and highly customizable.
+
 # Demo
 
 [Test Here](https://codesandbox.io/embed/practical-night-1ueohq?fontsize=14&hidenavigation=1&theme=dark)
-
-# Drs - Navbar 
-
-Simple Angular Navbar. It's fully responsive and highly customizable.
-
 
 ## Installation
 
@@ -18,18 +17,6 @@ $ npm i drs-navbar
 ```
 
 ## Usage
-Some informations before the effective usage:
-
-* You can set as many dropdown as you want
-* [FontAwesome](https://fontawesome.com/) icons are used, so you have to import the following libraries:
-
-```shell
-$ npm i @fortawesome/fontawesome-svg-core
-$ npm i @fortawesome/free-solid-svg-icons
-$ npm i @fortawesome/angular-fontawesome<version>
-```
-* Follow [This Guide](https://www.npmjs.com/package/@fortawesome/angular-fontawesome) to select the right angular-fortawensome version
-
 
 Import `DrsNavbarModule` in your `app.module.ts`
 ```js
@@ -51,26 +38,30 @@ Declare a configuration in your .ts file
 @NgModule({
     drsNavabarConfig: DrsNavbarConfiguration = {
         links:[
-          {name: 'Link 1', route: '/route1', icon: faBackspace},
-          {name: 'Link 2', route: '/route2', icon: faAddressCard, 
+          {name: 'Link 1', route: '/route1'},
+          {
+            name: 'Link 2', 
+            route: '/route2',
             dropDownList: 
               [
-                {text: 'DropDown 1'},
-                {text: 'DropDown 2'},
-                {text: 'DropDown 3'}
+                {name: 'DropDown 1', key: 0},
+                {name: 'DropDown 2', key: '1'},
+                {name: 'DropDown 3', key: 2.5}
               ]
           },
-          {name: 'Link 3', route: '/route3', icon: faTableTennis},
-          {name: 'Link 4', route: '/route4', icon: faICursor,
+          {name: 'Link 3', route: '/route3'},
+          {
+            name: 'Link 4', 
+            route: '/route4',
             dropDownList: 
               [
-                {text: 'DropDown 1'},
-                {text: 'DropDown 2'},
-                {text: 'DropDown 3'}
+                {name: 'DropDown 1', key: 'enum'},
+                {name: 'DropDown 2', key: 'other'},
+                {name: 'DropDown 3', key: ()=> 'hello'}
               ]
           },
         ],
-        logo: 'https://link-image.png', // You can also use local src
+        logo: 'https://link-image.png', // Or local images
         palette: DrsNavbarPalette.SkyPalette
     }
 ```
@@ -80,7 +71,52 @@ In your HTML file
 <drs-navbar [navbarConfiguration]="drsNavabarConfig"></drs-navbar>
 ```
 
-* Dropdown links are scrollable, so only the first three are visible
+* Dropdown links are scrollable, only the first five are visible
+
+## Templates
+The Navbar is provided with a default style but you can customize links/dropdowns/button with your custom templates, also thanks to some amazing tricks😉
+How to do that:
+
+Both in the links and dropdowns configuration you can pass a custom object with any parameter you want, like this:
+```js
+drsNavabarConfig: DrsNavbarConfiguration = {
+  links:[
+    {name: 'Link 1', route: '/route1', custom: {otherIcon: 'icon'}},
+    {name: 'Link 2', route: '/route2', custom: {text: 'text'}},
+    {
+      name: 'Link 3', 
+      route: '/route3',
+      dropDownList:[
+        {name: 'DropDown 1', key: 0, custom: {dropdownIcon: 'icon'}},
+        {name: 'DropDown 2', key: 1, custom: {other: 'rehto'}},
+        {name: 'DropDown 3', key: 2, custom: }
+      ]
+    },
+    {name: 'Link 4', route: '/route4', custom: {somethingElse: 'else'}},
+  ]
+}
+```
+
+so you can fully customize your template in this way:
+
+```HTML
+<!-- To customize main links -->
+<ng-template #myLinkTemplate let-link>
+  {{link.name}} {{link.custom && .link.custom.otherIcon ? link.custom.otherIcon : ''}}
+</ng-template>
+
+<!-- To customize all dropdowns single row -->
+<ng-template #myDropdownTemplate let-item>
+  {{item.name}} {{item.custom && .item.custom.dropdownIcon ? item.custom.dropdownIcon : ''}}
+</ng-template>
+
+  <drs-navbar 
+    [navbarConfiguration]="drsNavabarConfig" 
+    [linkTemplate]="myLinkTemplate" 
+    [dropdownTemplate]="myDropdownTemplate">
+  </drs-navbar>
+```
+
 
 ## Properties
  Property | Usage | Mandatory
@@ -103,5 +139,3 @@ There are six differents color palette for this navbar:
 * Red
 * Blue Sky
 * Violet
-
-If you want you can follow me on [Instagram](https://www.instagram.com/dna.iele/) 

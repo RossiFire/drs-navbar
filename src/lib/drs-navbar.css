@@ -60,7 +60,7 @@
   flex-direction: row;
   padding: 0 1rem;
 }
-.nvb-link, .big-chevron{cursor: pointer;}
+.nvb-link, .big-chevron{cursor: pointer; text-align: center;}
 
 .nvb-items:focus{border: none;outline: none}
 .nvb-items:focus:not(.nvb-items.active) .nvb-link{color: #222f3e}
@@ -119,14 +119,9 @@
   cursor: pointer;
   background-color: #222f3e83;
   border-radius: 8px;
-  transition: all 0.2s;}
-.hamburger-menu fa-icon{
-  font-size: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.2s;
 }
+
 /* Navbar Box wrapper*/
 .nvb-box-wrapper{
   cursor: pointer;
@@ -175,10 +170,7 @@
   top: 1.1rem;
   cursor: pointer;
 }
-/* Icon */
-.nvb-box.active ~ .chevron{color: white;}
-.nvb-box fa-icon{margin: 0 0.625rem !important;transition: all 0.2s;}
-
+.main-link{ width: 90%;}
 
 /*------------------ TABLET WIDTH 900PX ---------------*/
 @media screen and (max-width: 900px) {
