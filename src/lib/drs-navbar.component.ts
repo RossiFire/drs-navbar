@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
-import { faBars, faChevronDown, faChevronUp, faClose, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'drs-navbar',
@@ -46,7 +45,7 @@ export class DrsNavbarComponent implements OnInit, OnChanges{
 
     // Event emitter
     @Output() onDropdownClick = new EventEmitter<string>();
-    @Output() onLinkClick = new EventEmitter<string>();
+    @Output() onDropDownLinkClick = new EventEmitter<string>();
 
 
     /*  LifeCycle Hooks
@@ -127,7 +126,7 @@ export class DrsNavbarComponent implements OnInit, OnChanges{
 
     /** Link emitter */
     emitLinkClick(name: string){
-      this.onLinkClick.emit(name);
+      this.onDropDownLinkClick.emit(name);
       this.clearDropdown();
       this.closeNvb();
     }
@@ -147,13 +146,8 @@ export class DrsNavbarConfiguration{
   links!: DrsNavbarLinks[]
   palette?: DrsNavbarPalette
   logoSrc?: string
-  currentMenuIcon?: DrsMenuIcons
  }
 
-export class DrsMenuIcons{
-  whenNavbarClose!: IconDefinition
-  whenNavbarOpen!: IconDefinition
-}
 
 export class DrsNavbarLinks{
   name!: string
