@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { DrsNavbarComponent } from './drs-navbar.component';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -15,7 +14,6 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     CommonModule,
     RouterModule,
-    FontAwesomeModule
   ],
   exports: [
     DrsNavbarComponent

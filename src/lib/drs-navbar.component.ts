@@ -153,14 +153,14 @@ export class DrsNavbarLinks{
   name!: string
   route!: string
   dropDownList?: DrsNavbarDropdown[]
-  custom?: Partial<any>
+  custom?: any
 }
 
 
 export class DrsNavbarDropdown{
    name!: string
    key!: any
-   other?: Partial<any>
+   custom?: any
  }
 
  export class ButtonTemplate{

@@ -71,7 +71,7 @@ In your HTML file
 ```
 
 # Templates
-The Navbar is provided with a default style but you can customize links/dropdowns/button with your custom templates
+The Navbar needs your custom templates to customize links and dropdowns
 How to do that:
 
 Both in the links and dropdowns configuration you can pass a custom object with any parameter you want, like this:
@@ -94,7 +94,7 @@ drsNavabarConfig: DrsNavbarConfiguration = {
 }
 ```
 
-so you can fully customize your template in this way:
+You can implement your templates in this way:
 
 ```HTML
 <!-- To customize main links -->
@@ -119,8 +119,8 @@ so you can fully customize your template in this way:
  Property | Usage | Mandatory
 ------------- | ------------- | -------------
  navbarConfiguration  | Main configuration of the navbar. You can set links, logo, color palette,ecc | true  
- linkTemplate  | Main links template | false
- dropdownTemplate  | Dropdown links template | false
+ linkTemplate  | Main links template | true
+ dropdownTemplate  | Dropdown links template | true
  buttonTemplate  | Open/Close custom button template  | false
 
 # Output

@@ -1,6 +1,6 @@
 {
   "name": "drs-navbar",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "keywords": [
     "Navbar",
     "Angular",
@@ -11,7 +11,7 @@
   "author": {
     "name": "RossiFire",
     "email": "daniele.rossino10@gmail.com",
-    "url": "https://www.npmjs.com/package/drs-navbar"
+    "url": "https://www.npmjs.com/~rossifire"
   },
   "repository": {
     "url": "https://github.com/RossiFire/drs-navbar"
