@@ -7,7 +7,7 @@ Fully responsive and highly customizable routing based Angular Navbar.
 
 # Demo
 
-[Test Here](https://codesandbox.io/embed/practical-night-1ueohq?fontsize=14&hidenavigation=1&theme=dark)
+[Simple Example Here](https://stackblitz.com/edit/drs-navbar)
 
 # Installation
 
