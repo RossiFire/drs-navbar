@@ -1,6 +1,6 @@
 {
   "name": "drs-navbar",
-  "version": "0.0.9",
+  "version": "1.0.1",
   "keywords": [
     "Navbar",
     "Angular",
@@ -18,10 +18,9 @@
   },
   "license": "ISC",
   "peerDependencies": {
-    "@angular/common": "~12.2.16",
-    "@angular/core": "~12.2.16"
+    "@angular/core": "^14.0.0"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.4.0"
   }
 }

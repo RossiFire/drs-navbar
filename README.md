@@ -60,7 +60,7 @@ Declare a configuration in your .ts file
             ]
         },
       ],
-      logo: 'https://link-image.png', // Or local images
+      logoSrc: 'https://link-image.png', // Or local images
       palette: DrsNavbarPalette.SkyPalette
     }
 ```
